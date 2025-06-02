@@ -1,5 +1,5 @@
 // const { Carousel } = bootstrap
-
+import { appendCarousel, clear, createCarouselItem } from "./Carousel.js";
 // import axios from "axios";
 
 // The breed selection input element.
@@ -54,8 +54,16 @@ breedSelect.addEventListener('change', async(event)=>{
   const selectedBreedId = event.target.value;
   const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=1&breed_ids=${selectedBreedId}&api_key=${API_KEY}`);
   const breedImg = await response.json();
-  console.log(breedImg)
+  console.log(response)
+  console.log(breedImg) 
+  console.log(breedImg[0].url)
+  breedImg.forEach(breedimg =>{
+    const imgEl = createCarouselItem(breedimg.url, event.target.textContent, breedimg.id);
+    appendCarousel(imgEl)
+    
 
+  
+})
 })
 
 
